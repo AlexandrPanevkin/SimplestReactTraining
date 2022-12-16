@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import './App.css';
-import {Country} from "./Country";
+import {Country} from "./Components/HW1/Country";
+import {SuperButton} from "./Components/HW2/SuperButton";
 
 export type BanknotsType = 'Dollars'| 'RUBLS' | 'All'
 export type MoneyType = {
@@ -39,11 +40,17 @@ function App() {
     const filteredMoney = moneyFilter(defaultMoney, filter)
     return (
         <div className="App">
-            <Country
-                data={filteredMoney}   //отрисовать будем деньги после фильтрации
-                setFilter={setFilter}  //useState передаем? Так можно было?!
-                filter={filter}       //если не будем использовать, может вообще не передавать?
-            />
+            <div> HW1
+                <Country
+                    data={filteredMoney}   //отрисовать будем деньги после фильтрации
+                    setFilter={setFilter}  //useState передаем? Так можно было?!
+                    filter={filter}       //если не будем использовать, может вообще не передавать?
+                />
+                <hr/></div>
+           <div> HW2
+               <SuperButton callBack={()=>{}} color={'red'}>Red super button</SuperButton>
+               <hr/></div>
+
         </div>
     );
 }
