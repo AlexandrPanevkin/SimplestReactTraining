@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 import './App.css';
 import {Country} from "./Components/HW1/Country";
 import {SuperButton} from "./Components/HW2/SuperButton";
+import {SuperRubles} from "./Components/HW2/SuperRubles";
 
-export type BanknotsType = 'Dollars'| 'RUBLS' | 'All'
+export type BanknotsType = 'Dollars' | 'RUBLS' | 'All'
 export type MoneyType = {
     banknotes: BanknotsType
     value: number
@@ -23,12 +24,12 @@ let defaultMoney: MoneyType[] = [
 
 // типизируем на входе и выходе
 export const moneyFilter = (money: MoneyType[], filter: BanknotsType): MoneyType[] => {
-    if(filter==='All'){
+    if (filter === 'All') {
         return money
     }
     //если пришел filter со значением 'All', то возвращаем все банкноты
     //return money.filter... ну да, придется фильтровать
-    return money.filter(el=>el.banknotes===filter)
+    return money.filter(el => el.banknotes === filter)
 }
 
 function App() {
@@ -38,6 +39,12 @@ function App() {
     // а вот сейчас притормаживаем. И вдумчиво: константа filteredMoney получает результат функции moneyFilter
     // в функцию передаем деньги и фильтр, по которому ихбудем выдавать(ретёрнуть)
     const filteredMoney = moneyFilter(defaultMoney, filter)
+
+    const rubles = [
+        {id: 1, banknotes : 'RUBLES', isDone: true},
+        {id: 2, banknotes : 'Dollars', isDone: false},
+        {id: 3, banknotes : 'EURO', isDone: true}
+    ]
     return (
         <div className="App">
             <div> HW1
@@ -46,10 +53,29 @@ function App() {
                     setFilter={setFilter}  //useState передаем? Так можно было?!
                     filter={filter}       //если не будем использовать, может вообще не передавать?
                 />
-                <hr/></div>
-           <div> HW2
-               <SuperButton callBack={()=>{}} color={'red'}>Red super button</SuperButton>
-               <hr/></div>
+                <hr/>
+            </div>
+            <div> HW2
+                <SuperRubles rubles={rubles}>
+                    <div>News</div>
+                    <div>News</div>
+                    <div>News</div>
+                    <div>News</div>
+                </SuperRubles>
+                <SuperRubles rubles={rubles}>
+                 <div>POP</div>
+                 <div>POP</div>
+                 <div>POP</div>
+                </SuperRubles>
+                <SuperRubles rubles={rubles}>xxx</SuperRubles>
+                <SuperButton callBack={() => {
+                }} color={'red'}>RED super button</SuperButton>
+                <SuperButton callBack={() => {
+                }}>DEFAULT super button</SuperButton>
+                <SuperButton callBack={() => {
+                }} color={'secondary'} disabled>SECONDARY-DISABLED super button</SuperButton>
+                <hr/>
+            </div>
 
         </div>
     );
